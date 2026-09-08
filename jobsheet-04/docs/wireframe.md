@@ -102,3 +102,84 @@ Halaman yang sudah ada (Beranda, Daftar/Tambah Buku, Daftar/Tambah Anggota — J
 - Warna aksen, tipografi navbar, dan gaya tabel/kartu mengikuti `assets/css/style.css` yang sudah dibangun sejak Jobsheet 2-3.
 - Navbar akan ditambah menu **Peminjaman** dan indikator status login (nama petugas / tombol Logout) mulai implementasi di Jobsheet 10.
 - Edge case yang perlu ditangani saat implementasi: buku stok habis tidak boleh dipilih di form peminjaman; anggota dengan tunggakan terlambat divalidasi di Jobsheet 12 (tugas mandiri).
+
+# Tugas Jobsheet 4: Bagian 6.4 Latihan
+
+Link github: https://github.com/Isya-25th/PemrogramanWeb2026/tree/main/jobsheet-04
+
+---
+
+### 1. Wireframe Halaman "Registrasi Anggota Baru" (Konvensi ASCII)
+Menggunakan konvensi simbol ASCII untuk merancang antarmuka.
+
+    +---------------------------------------------------+
+    |                   SIMPUS-Mini                     |
+    +---------------------------------------------------+
+    |                                                   |
+    |            [ Registrasi Anggota Baru ]            |
+    |                                                   |
+    |   Nama Lengkap   : [                        ]     |
+    |   Email          : [                        ]     |
+    |   Password       : [                        ]     |
+    |   Ulangi Password: [                        ]     |
+    |                                                   |
+    |                [    Daftar    ]                   |
+    |                                                   |
+    |        Sudah punya akun? Login di sini            |
+    +---------------------------------------------------+
+
+### 2. User Flow: Petugas Mencari Anggota dengan Tunggakan Lewat Jatuh Tempo
+
+    [Petugas Login] -> [Dashboard] -> [Pilih menu "Anggota"] 
+    -> [Pilih tab/filter "Tunggakan Terlambat"] -> [Sistem menampilkan daftar anggota yang melewati batas waktu]
+    -> [Pilih salah satu Anggota] -> [Tampilkan detail denda dan buku yang belum dikembalikan]
+
+### 3. Identifikasi Edge Case Tambahan
+Beberapa pengecualian lain yang mungkin terjadi namun belum tercatat di dokumen:
+*   **Peminjaman Ganda:** Apa yang terjadi jika Petugas mencoba meminjamkan judul buku yang persis sama kepada anggota yang sama dalam satu waktu atau ketika anggota tersebut belum mengembalikan salinan sebelumnya? Sistem harus memblokir aksi ini atau memberikan peringatan.
+*   **Batas Maksimal Peminjaman:** Apa yang terjadi jika seorang anggota mencoba meminjam buku melebihi batas kuota peminjaman yang diizinkan (misalnya maksimal 3 buku)? Sistem harus mendisable tombol pinjam atau memunculkan pesan error.
+*   **Kehilangan atau Kerusakan Buku:** Bagaimana alur penanganan jika anggota melaporkan bahwa buku yang dipinjamnya hilang atau rusak parah? Perlu ada alur untuk mencatat denda ganti rugi atau penggantian status inventaris buku menjadi "Hilang".
+*   **Sesi Login Habis:** Apa yang terjadi jika Petugas meninggalkan tab browser terbuka selama berjam-jam, lalu mencoba menyimpan transaksi peminjaman? Sistem harus mendeteksi sesi yang sudah kadaluarsa dan mengarahkan petugas kembali ke halaman Login.
+
+### 4. Implementasi HTML Statis Wireframe Login
+Berikut adalah implementasi wireframe login menjadi kode HTML statis menggunakan pola `<label>` dan `<input>` yang sudah dipelajari.
+
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Petugas - SIMPUS-Mini</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>SIMPUS-Mini</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Login Petugas</h2>
+            <form action="#" method="POST">
+                <div style="margin-bottom: 1rem;">
+                    <label for="username">Username :</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label for="password">Password :</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <button type="submit">Masuk</button>
+                
+                <p>
+                    Belum punya akun? <a href="register.html">Daftar di sini</a>
+                </p>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
+```
