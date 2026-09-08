@@ -30,7 +30,7 @@ header {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    postion: relative;
+    position: relative;
 }
 
 header h1 {
@@ -38,7 +38,7 @@ header h1 {
 }
 
 .nav-toggle-tabble {
-    displau: block;
+    display: block;
     font-size: 1.6rem;
     color: #fff;
     cursor: pointer;
