@@ -110,23 +110,23 @@ Link github: https://github.com/Isya-25th/PemrogramanWeb2026/tree/main/jobsheet-
 ---
 
 ### 1. Wireframe Halaman "Registrasi Anggota Baru" (Konvensi ASCII)
-Menggunakan konvensi simbol ASCII untuk merancang antarmuka.
+[[ SIMPUS-Mini ]]
 
-    +---------------------------------------------------+
-    |                   SIMPUS-Mini                     |
-    +---------------------------------------------------+
-    |                                                   |
-    |            [ Registrasi Anggota Baru ]            |
-    |                                                   |
-    |   Nama Lengkap   : [                        ]     |
-    |   Email          : [                        ]     |
-    |   Password       : [                        ]     |
-    |   Ulangi Password: [                        ]     |
-    |                                                   |
-    |                [    Daftar    ]                   |
-    |                                                   |
-    |        Sudah punya akun? Login di sini            |
-    +---------------------------------------------------+
+## Registrasi Anggota Baru
+
+[Nama Lengkap_____________]
+
+[Email____________________]
+
+[Password_________________]
+
+[Ulangi Password__________]
+
+[Daftar]
+
+---
+
+Sudah punya akun? [Login di sini]
 
 ### 2. User Flow: Petugas Mencari Anggota dengan Tunggakan Lewat Jatuh Tempo
 
