@@ -2,16 +2,21 @@
 session_start();
 
 $nama = trim($_POST['nama'] ?? '');
-$noAnggota = trim($_POST['no_anggota'] ?? '');
+$no_anggota = trim($_POST['no_anggota'] ?? '');
 $alamat = trim($_POST['alamat'] ?? '');
-$noHp = trim($_POST['no_hp'] ?? '');
+$no_hp = trim($_POST['no_hp'] ?? '');
 
 $errors = [];
 if ($nama === '') {
     $errors[] = "Nama wajib diisi.";
 }
-if ($noAnggota === '') {
-    $errors[] = "No. Anggota wajib diisi.";
+if ($no_anggota === '') {
+    $errors[] = "Nomor Anggota wajib diisi.";
+}
+if ($no_hp !== '') {
+    if (!preg_match('/^[0-9+]+$/', $no_hp)) {
+        $errors[] = "Nomor HP hanya boleh berisi angka dan tanda tambah (+).";
+    }
 }
 
 if (!empty($errors)) {
@@ -26,9 +31,9 @@ if (!isset($_SESSION['anggota'])) {
 
 $_SESSION['anggota'][] = [
     'nama' => $nama,
-    'no_anggota' => $noAnggota,
+    'no_anggota' => $no_anggota,
     'alamat' => $alamat,
-    'no_hp' => $noHp,
+    'no_hp' => $no_hp
 ];
 
 $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Anggota berhasil ditambahkan.'];
