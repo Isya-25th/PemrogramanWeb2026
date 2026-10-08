@@ -39,7 +39,7 @@ try {
     exit;
 
 } catch (PDOException $e) {
-    if ($e->getCode() == '23505') { //Kode pelanggan UNIQUE
+    if ($e->getCode() == '23505') {
         $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'No. Anggota sudah dipakai, gunakan nomor lain.'];
     } else {
         $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Gagal menyimpan data: ' . $e->getMessage()];
