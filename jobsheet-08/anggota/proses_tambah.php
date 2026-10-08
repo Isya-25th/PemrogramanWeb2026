@@ -39,8 +39,13 @@ try {
     exit;
 
 } catch (PDOException $e) {
-    // Matikan halaman dan cetak error aslinya
-    die("KODE ERROR: " . $e->getCode() . "<br>PESAN LENGKAP: " . $e->getMessage());
+    if ($e->getCode() == '23505') {
+        $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'No. Anggota sudah dipakai, gunakan nomor lain.'];
+    } else {
+        $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Gagal menyimpan data: ' . $e->getMessage()];
+    }
+    header('Location: tambah.php');
+    exit;
 }
 
 $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Anggota berhasil ditambahkan.'];
