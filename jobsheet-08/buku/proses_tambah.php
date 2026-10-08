@@ -9,6 +9,8 @@ $isbn = trim($_POST['isbn'] ?? '');
 $stok = $_POST['stok'] ?? '';
 $kategori = trim($_POST['kategori'] ?? '');
 
+// Validasi server-side — wajib ada meski sudah divalidasi JS di Jobsheet 5,
+// karena validasi client bisa dilewati (nonaktifkan JS / kirim request manual).
 $errors = [];
 if ($judul === '') {
     $errors[] = "Judul wajib diisi.";
