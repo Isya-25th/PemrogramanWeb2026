@@ -26,12 +26,27 @@ $stmt = $pdo->prepare(
      VALUES (:nama, :no_anggota, :alamat, :no_hp)
      RETURNING id"
 );
-$stmt->execute([
-    'nama' => $nama,
-    'no_anggota' => $noAnggota,
-    'alamat' => $alamat,
-    'no_hp' => $noHp,
-]);
+try {
+    $stmt->execute([
+        'nama' => $nama,
+        'no_anggota' => $no_anggota,
+        'alamat' => $alamat,
+        'no_hp' => $no_hp
+    ]);
+    
+    $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Anggota berhasil ditambahkan.'];
+    header('Location: list.php');
+    exit;
+
+} catch (PDOException $e) {
+    if ($e->getCode() == '23505') { //Kode pelanggan UNIQUE
+        $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'No. Anggota sudah dipakai, gunakan nomor lain.'];
+    } else {
+        $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Gagal menyimpan data: ' . $e->getMessage()];
+    }
+    header('Location: tambah.php');
+    exit;
+}
 
 $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Anggota berhasil ditambahkan.'];
 header('Location: list.php');
