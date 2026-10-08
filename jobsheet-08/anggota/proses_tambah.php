@@ -3,15 +3,15 @@ session_start();
 require __DIR__ . '/../includes/koneksi.php';
 
 $nama = trim($_POST['nama'] ?? '');
-$noAnggota = trim($_POST['no_anggota'] ?? '');
+$no_anggota = trim($_POST['no_anggota'] ?? ''); 
 $alamat = trim($_POST['alamat'] ?? '');
-$noHp = trim($_POST['no_hp'] ?? '');
+$no_hp = trim($_POST['no_hp'] ?? '');
 
 $errors = [];
 if ($nama === '') {
     $errors[] = "Nama wajib diisi.";
 }
-if ($noAnggota === '') {
+if ($no_anggota === '') {
     $errors[] = "No. Anggota wajib diisi.";
 }
 
@@ -39,13 +39,8 @@ try {
     exit;
 
 } catch (PDOException $e) {
-    if ($e->getCode() == '23505') {
-        $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'No. Anggota sudah dipakai, gunakan nomor lain.'];
-    } else {
-        $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Gagal menyimpan data: ' . $e->getMessage()];
-    }
-    header('Location: tambah.php');
-    exit;
+    // Matikan halaman dan cetak error aslinya
+    die("KODE ERROR: " . $e->getCode() . "<br>PESAN LENGKAP: " . $e->getMessage());
 }
 
 $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Anggota berhasil ditambahkan.'];
